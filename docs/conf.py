@@ -19,11 +19,15 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'DeepGraphs'
-copyright = '2022, ' + deepgraphs.__author__
-author = deepgraphs.__author__
+# copyright = '2022, ' + deepgraphs.__author__
+# author = deepgraphs.__author__
+
+copyright = '2022, DeepPavlov.ai'
+author = 'DeepPavlov.ai'
+version = '0.1'
 
 # The short X.Y version
-version = deepgraphs.__version__
+# version = deepgraphs.__version__
 # The full version, including alpha/beta/rc tags
 release = version
 
