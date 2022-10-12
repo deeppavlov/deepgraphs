@@ -1,5 +1,0 @@
-
-Contribution Guide
-=====================
-
-Contribution Guide
