@@ -31,6 +31,9 @@ version = '0.1'
 # The full version, including alpha/beta/rc tags
 release = version
 
+description = 'DeepPavlov Knowledge Graph Services'
+keywords = ['KG', 'Knowledge Graphs', 'Knowledge Graph', 'Entity Linking']
+
 
 # -- General configuration ---------------------------------------------------
 
@@ -187,8 +190,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, project, f'{project} Documentation',
-     author, project, deepgraphs.__description__,
-     str(deepgraphs.__keywords__)),
+     author, project, description,
+     str(keywords)),
 ]
 
 
