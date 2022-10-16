@@ -78,7 +78,7 @@ Examples of entity detection usage:
 
 Output:
 
-```json
+```javascript
     [
         {
             "entities": ["capital", "russia"],
