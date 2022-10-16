@@ -125,14 +125,14 @@ Output:
     [
         [
             {
-             'entity_substr': 'forrest gump',
-             'entity_id_tags': ['FILM'],
-             'entity_ids': ['Q134773'],
-             'pages_titles': ['Forrest Gump'],
-             'confidences': [46.0],
-             'dbpedia_types': [['http://dbpedia.org/ontology/Film', 'http://dbpedia.org/ontology/Work']],
-             'first_paragraphs': ['Forrest Gump is a 1994 American comedy-drama film directed by Robert Zemeckis and written by Eric Roth.'],
-             'tokens_match_conf': [1.0]
+                "entity_substr": "forrest gump",
+                "entity_id_tags": ["FILM"],
+                "entity_ids": ["Q134773"],
+                "pages_titles": ["Forrest Gump"],
+                "confidences": [46.0],
+                "dbpedia_types": [["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Work"]],
+                "first_paragraphs": ["Forrest Gump is a 1994 American comedy-drama film directed by Robert Zemeckis and written by Eric Roth."],
+                "tokens_match_conf": [1.0]
             }
         ]
     ]
