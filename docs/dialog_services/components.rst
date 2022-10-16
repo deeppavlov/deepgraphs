@@ -2,9 +2,65 @@
 Dialog Services
 ================
 
-Triplet Extraction
+User Property Extraction
 -------------------
-Дима, напиши
+For generation utterances in scripted skills, relevant for a particular user, the dialogue assistant should know different user attributes, for example, favourite film, dish, pet etc. Property Extraction annotator in DREAM extracts user attributes from utterances.
+
+Property Extraction annotator takes as input an utterance and outputs triplets in the format <subject, relation, object>, where the subject is, as usual, the user, the relation is the name of the attribute, the object is the value of the attribute. For example, for the utterance "I like skiing in winter" the triplet <user, like_activity, skiing> will be extracted.
+
+Property Extraction annotator consists of the following components:
+* T5-base <https://huggingface.co/t5-base>`__, which generates a sequence of triplet tokens, where subject, relation and object are separated with special tokens: <subj> subject <rel> relation <obj> object.
+* (optional) DistilBERT model for relation classification. In the final output the triplets where the relation does not match with classified relation, are filtered out.
+
+The models are trained on DialogueNLI dataset <https://wellecks.com/dialogue_nli/>`__ which has 59.2 K samples in train set, 6.2 K in valid set and 6.1 K in test set. Triplets in DialogueNLI contain 61 relation types, top-10 most frequent relations are listed in the table below.
+
++-----------------+-------------------+
+| Relation        | Number of samples |
++=================+===================+
+| have_pet        |       5184        |
++-----------------+-------------------+
+| like_activity   |       4620        |
++-----------------+-------------------+
+| has_profession  |       2920        |
++-----------------+-------------------+
+| has_hobby       |       2864        |
++-----------------+-------------------+
+| have            |       2824        |
++-----------------+-------------------+
+| have_children   |       2713        |
++-----------------+-------------------+
+| like_general    |       2559        |
++-----------------+-------------------+
+| other           |       2159        |
++-----------------+-------------------+
+| like_food       |       1997        |
++-----------------+-------------------+
+| misc_attribute  |       1722        |
++-----------------+-------------------+
+
+Comparison with other solutions:
+
++----------------------------------+-----------------+
+| Model                            | DialogueNLI, F1 |
++==================================+=================+
+| DREAM property extraction        |      0.44       |
++----------------------------------+-----------------+
+| `GenRe`_                         |      0.44       |
++----------------------------------+-----------------+
+| `Two-stage Attribute Extractor`_ |      0.28       |
++----------------------------------+-----------------+
+
+.. _`GenRe`: https://arxiv.org/abs/2109.12702
+.. _`Two-stage Attribute Extractor`: https://arxiv.org/abs/1908.04621
+
+Examples of property extraction:
+
+.. code:: python
+
+    >>> requests.post(property_extraction_url, json = {"utterances": ["i live in moscow"]}).json()
+    [{"triplet": {"object": "moscow", "relation": "live in citystatecountry", "subject": "user"}}]
+    >>> requests.post(property_extraction_url, json = {"utterances": ["i listen to scorpions"]}).json()
+    [{"triplet": {"object": "scorpions", "relation": "like music", "subject": "user"}}]
 
 Entity Detection
 -------------------
