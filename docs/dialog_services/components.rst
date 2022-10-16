@@ -75,25 +75,7 @@ Examples of entity detection usage:
 .. code:: python
 
     >>> requests.post(entity_detection_url, json = {"sentences": [["what is the capital of russia?"]]}).json()
-
-Output:
-
-```
-
-{
-    "entities": ["capital", "russia"],
-    "labelled_entities": [
-        {"text": "capital", "offsets": [12, 19], "label": "misc", "finegrained_label": [["misc", 1.0]]},
-        {
-            "text": "russia",
-            "offsets": [23, 29],
-            "label": "location",
-            "finegrained_label": [["country", 0.953]]
-        }
-    ]
-}
-
-```
+    {"entities": ["capital", "russia"], "labelled_entities": [{"text": "capital", "offsets": [12, 19], "label": "misc", "finegrained_label": [["misc", 1.0]]}, {"text": "russia", "offsets": [23, 29], "label": "location", "finegrained_label": [["country", 0.953]]}]}
 
 Elements of the output data:
 
