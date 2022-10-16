@@ -86,11 +86,11 @@ Output:
                 "text": "russia",
                 "offsets": [23, 29],
                 "label": "location",
-                "finegrained_label": [["country", 0.953]],
-            },
+                "finegrained_label": [["country", 0.953]]
+            }
         ]
     }
-    
+
 Elements of the output data:
 
 * "entities" - entity substrings in the utterance
