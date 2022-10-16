@@ -55,7 +55,7 @@ Comparison with other solutions:
 .. _`GenRe`: https://arxiv.org/abs/2109.12702
 .. _`Two-stage Attribute Extractor`: https://arxiv.org/abs/1908.04621
 
-Examples of property extraction usage:
+Examples of Property Extraction usage:
 
 .. code:: python
 
@@ -71,7 +71,7 @@ Entity Detection annotator extracts entity substrings from the utterance and def
 
 Entity recognition process is implemented as the classification of text tokens into three classes: "B-ENT" for the beginning of the entity mention, "I-ENT" for the inner part of the mention, and "O" for other tokens. For entity recognition we trained the model with a dense layer on top of pretrained DistilBERT. Entity classifier is based on DistilBERT, in which averaged hidden states for the tokens of entity substring are fed into a dense layer for classification into 42 classes corresponding to entity types.
 
-Examples of entity detection usage:
+Examples of Entity Detection usage:
 
 .. code:: python
 
@@ -106,6 +106,46 @@ Elements of the output data:
 Entity Linking
 -------------------
 
+Entity Linking annotator defines Wikidata IDs for entity substrings in the user utterance. For example, for the entity "Germany" in the utterance "I went to Germany" the annotator finds the ID "Q183" and corresponding Wikipedia page title "Germany". First, Entity Linking service extracts candidate entities from the inverted index and then defines which of these entities better fit the context.
 
+Index of entities with the corresponding Wikipedia page titles is stored in the SQLite database with the FTS5 extension. In the SQLite database only indexes are loaded into RAM, which leads to low memory usage. The row in the entities table contains an entity title, entity ID in Wikidata, Wikipedia page title, an entity tag, and an entity description. To retrieve candidate entities, we execute a query to the database that contains entity substring and the top-3 tags, detected with the entity type classification model.
+
+Entity disambiguation helps to define which entity is more appropriate to the context. Candidate entities are sorted by dot product of context and description embeddings. Context embedding is obtained by replacing entity substring with a special ENT-token and taking its BERT-small output vector. Entity representation is also calculated with BERT-small from entity description with hidden state of CLS token. The model is trained to maximize the dot product of context and entity embeddings if the entity is appropriate to the context and minimize otherwise.
+
+Examples of Entity Linking usage:
+
+.. code:: python
+
+    >>> requests.post(entity_linking_url, json = {"entity_substr": [["forrest gump"]], "entity_tags": [[[("film", 0.9)]]], "context": [["who directed forrest gump?"]]}).json()
+    
+Output:
+
+.. code:: json
+
+    [
+        [
+            {
+             'entity_substr': 'forrest gump',
+             'entity_id_tags': ['FILM'],
+             'entity_ids': ['Q134773'],
+             'pages_titles': ['Forrest Gump'],
+             'confidences': [46.0],
+             'dbpedia_types': [['http://dbpedia.org/ontology/Film', 'http://dbpedia.org/ontology/Work']],
+             'first_paragraphs': ['Forrest Gump is a 1994 American comedy-drama film directed by Robert Zemeckis and written by Eric Roth.'],
+             'tokens_match_conf': [1.0]
+            }
+        ]
+    ]
+
+Elements of the output data:
+
+* "entity_substr" - entity substring from the utterance;
+* "entity_id_tags" - Entity Detection tags for extracted Wikidata entities;
+* "entity_ids" - Wikidata entity IDs, linked for the substring in the utterance;
+* "pages_titles" - Wikipedia page titles, corresponding to Wikidata entity IDs;
+* "confidences" - confidences of extracted Wikidata entities for the substring;
+* "dbpedia_types" - DBpedia types, corresponding to extracted Wikidata entities;
+* "first_paragraphs": first paragraphs from Wikipedia pages;
+* "tokens_match_conf" - the ratios of matching of entity substring and extracted entity IDs titles.
 
  Check out our `Blogpost <https://medium.com/deeppavlov/using-annotators-for-the-utterances-analysis-in-dream-dialogue-assistant-730b99dcabbc>`_ about Dream services that work with Knowledge Graphs to learn more.
