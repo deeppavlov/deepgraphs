@@ -12,7 +12,6 @@ Property Extraction annotator takes as input an utterance and outputs triplets i
 Property Extraction annotator consists of the following components:
 
 * T5-base <https://huggingface.co/t5-base>`__, which generates a sequence of triplet tokens, where subject, relation and object are separated with special tokens: <subj> subject <rel> relation <obj> object.
-
 * (optional) DistilBERT model for relation classification. In the final output the triplets where the relation does not match with classified relation, are filtered out.
 
 The models are trained on DialogueNLI dataset <https://wellecks.com/dialogue_nli/>`__ which has 59.2 K samples in train set, 6.2 K in valid set and 6.1 K in test set. Triplets in DialogueNLI contain 61 relation types, top-10 most frequent relations are listed in the table below.
@@ -77,6 +76,8 @@ Examples of entity detection usage:
 .. code:: python
 
     >>> requests.post(entity_detection_url, json = {"sentences": [["what is the capital of russia?"]]}).json()
+    
+Output:
 
 .. code:: json
 
@@ -96,11 +97,11 @@ Examples of entity detection usage:
 Elements of the output data:
 
 * "entities" - entity substrings in the utterance;
-
 * "labelled_entities" - entity substrings with extra annotations:
-      - "offsets" - indices of start and end symbols of entity substring in the utterance;
-      - "label" - entity tag;
-      - "finegrained_label" - more specific entity tag.
+
+  * "offsets" - indices of start and end symbols of entity substring in the utterance;
+  * "label" - entity tag;
+  * "finegrained_label" - more specific entity tag.
 
 Entity Linking
 -------------------
