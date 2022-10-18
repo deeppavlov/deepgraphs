@@ -11,9 +11,4 @@ Custom Entity Extraction Service
 --------------------------------
 Author: Dima
 
-
-Custom KG
----------
-Author: Rami
-
   
