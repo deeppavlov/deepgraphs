@@ -2,18 +2,18 @@
 Document Services
 ===================
 
-Entity Detection
------------------
-Дима, напиши
+Entity Extraction Service
+-------------------------
+Authors: Dima (everything except HTML), Max (HTML endpoint)
 
 
-Entity Linking
----------------
-Дима, напиши
+Custom Entity Extraction Service
+--------------------------------
+Author: Dima
 
 
-Something Else
----------------
-Дима, напиши
+Custom KG
+---------
+Author: Rami
 
   

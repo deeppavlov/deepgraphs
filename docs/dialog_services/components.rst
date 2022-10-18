@@ -3,7 +3,7 @@ Dialog Services
 ================
 
 User Property Extraction
--------------------
+------------------------
 
 For generation utterances in scripted skills, relevant for a particular user, the dialogue assistant should know different user attributes, for example, favourite film, dish, pet etc. Property Extraction annotator in DREAM extracts user attributes from utterances.
 
