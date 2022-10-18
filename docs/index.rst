@@ -35,7 +35,14 @@ This page is dedicated to the DeepPalov services that are related to Knowledge G
 
    Components <doc_services/components>
    Tutorials <doc_services/tutorials>
-   
+
+.. toctree::
+   :glob:
+   :maxdepth: 3
+   :caption: Shared KG Services
+
+   Components <shared_kg_services/components>
+   Tutorials <shared_kg_services/tutorials>
 
 .. toctree::
    :glob:
