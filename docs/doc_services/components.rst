@@ -49,8 +49,8 @@ Output:
               "tags": ["WORK_OF_ART", "LITERARY_WORK", "FAC"],
               "types": [],
               "image":{
-                "full": <image>,
-                "thumbnail": <thumbnail>
+                "full": "image",
+                "thumbnail": "thumbnail"
                 },
               "lod":{
                 "wikipedia": "https://en.wikipedia.org/wiki/Mona_Lisa_(Prado)"
@@ -75,7 +75,7 @@ Elements of the output data:
 * "tags" - entity detection tags for the extracted Wikidata entity
 * "types" - DBpedia types corresponding to the extracted Wikidata entity
 * "image" - Wikidata image information
-* "lod" - 
+* "lod" - Wikipedia page url
 * "extras" - information about alternative entity IDs with smaller probabilities
 
 
@@ -97,6 +97,7 @@ Let's consider a small custom database in .nt format given below. To add these t
 |    <Q4> <label> "International Space Station" .
 |    <Q5> <label> "NASA" .
 |    <Q6> <label> "Dragon" .
+|
 
 >>> requests.post("http://0.0.0.0:9103/kb_schema", json={"relation_info": {"label_rel": "label", "type_rel": "type"}})
 >>> requests.post("http://0.0.0.0:9103/add_kb", json={"triplets": lines})
@@ -111,9 +112,9 @@ Output:
 .. code:: json
 
     {	
-        “entity_substr”: [['spacex', 'dragon', 'elon musk', 'crew-4', 'international space station', 'nasa', 'spacex']],
-        “entity_offsets”: [[[0, 6], [45, 51], [72, 81], [116, 122], [141, 168], [173, 177], [256, 262]]],
-        “entity_ids”: [[['Q2'], ['Q6'], ['Q1'], ['Q3'], ['Q4'], ['Q5'], ['Q2']]],
-        “entity_tags”: [[['misc'], ['misc'], ['misc'], ['misc'], ['misc'], ['misc'], ['misc']]],
-        “entity_conf”: [[[1.0], [1.0], [1.0], [0.4], [1.0], [1.0], [1.0]]]
+        "entity_substr": [["spacex", "dragon", "elon musk", "crew-4", "international space station", "nasa", "spacex"]],
+        "entity_offsets": [[[0, 6], [45, 51], [72, 81], [116, 122], [141, 168], [173, 177], [256, 262]]],
+        "entity_ids": [[["Q2"], ["Q6"], ["Q1"], ["Q3"], ["Q4"], ["Q5"], ["Q2"]]],
+        "entity_tags": [[["misc"], ["misc"], ["misc"], ["misc"], ["misc"], ["misc"], ["misc"]]],
+        "entity_conf": [[[1.0], [1.0], [1.0], [0.4], [1.0], [1.0], [1.0]]]
     }
