@@ -9,7 +9,7 @@ Storing Information
 
 The storing pipeline cosists of the following steps:
 
-* Extracting triplets from an utterance with the **Triplet extraction** service.
+* Extracting triplets from an utterance with the **Property Extraction** service.
 * Linking entities from the extracted triplet to the exsisting ones in the KG with the **Entity linking** service.
 * Storing new relationships or properties in the KG with the **Custom Graph Annotator**.
 
