@@ -3,7 +3,7 @@ Working with Document Services
 ===============================
 
 How to call the service REST API
--------------------------------
+-----------------------------------
 
 The service can be called via http://7040.deeppavlov.ai/ directly in your app. 
 
@@ -45,7 +45,18 @@ The service can be called via http://7040.deeppavlov.ai/ directly in your app.
         "uri":"https://en.wikipedia.org/wiki/Leonardo_da_Vinci",
         "abstract":"Leonardo di ser Piero da Vinci (15 April 14522 May 1519) was an [...] ",
         "label":"Leonardo da Vinci",
-        "categories":["Leonardo da Vinci", "1452 births", "1519 deaths", [...]],
+        "categories":[
+            "Leonardo da Vinci",
+            "1452 births",
+            "1519 deaths",
+            "15th-century Italian mathematicians",
+            "15th-century Italian painters",
+            "15th-century Italian scientists",
+            "15th-century Italian sculptors",
+            "15th-century people of the Republic of Florence",
+            "16th-century Italian mathematicians",
+            "16th-century Italian painters"
+        ],
         "tags":["PER", "WRITER", "BUSINESS"],
         "types":["https://dbpedia.org/ontology/Agent"],
         "image":{
@@ -66,7 +77,15 @@ The service can be called via http://7040.deeppavlov.ai/ directly in your app.
             "uri":"https://en.wikipedia.org/wiki/Bartolomé_Leonardo_de_Argensola",
             "abstract":"Bartolomé Leonardo de Argensola was baptized at Barbastro on August 26, 1562. He studied at [...] ",
             "label":"Bartolomé Leonardo de Argensola",
-            "categories":["1562 births", "1631 deaths", "People from Barbastro", [...]],
+            "categories":[
+                "1562 births",
+                "1631 deaths",
+                "People from Barbastro",
+                "Spanish poets",
+                "Spanish historians",
+                "Spanish male poets",
+                "University of Salamanca alumni"
+            ],
             "tags":["PER", "WRITER", "BUSINESS"],
             "types":["https://dbpedia.org/ontology/Agent"],
             "image":{
@@ -87,7 +106,7 @@ The service can be called via http://7040.deeppavlov.ai/ directly in your app.
 
 
 How to launch the service locally
--------------------------------
+-----------------------------------
 
 To launch Entity Extraction Service locally, you should clone the repository and then build and launch the service containers:
 
