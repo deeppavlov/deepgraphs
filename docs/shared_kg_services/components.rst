@@ -1,35 +1,91 @@
 
 Shared KG Services
-==================
+******************
 
 Custom KG
----------
+=========
 Custom knowledge graph API is designed to provide an easy interface to CRUD data to databases like TerminusDB and Neo4j in the runtime.
 
 If you'd like to contribute, `fork us on GitHub! <https://github.com/deeppavlov/custom_kg_svc/tree/main>`_
 
-.. **Behold, the power of Custom KG:**
+.. TODO: **Behold, the power of Custom KG:**
 
-.. .. code:: python
+Installation
+------------
 
-..     DB = "example_db"
-..     TEAM ="example_team|1"
-..     terminus_kg = TerminusdbKnowledgeGraph(team=TEAM, db_name=DB)
+Here is a step by step guide to install Custom KG. It will get you to a point of having 
+a database up and running *in one of three ways* and the API ready to deal with it.
 
+Clone the repository somewhere on your disk and enter the repository:
 
-..     NEO4J_BOLT_URL = "bolt://neo4j:neo4j@localhost:7687"
-..     ONTOLOGY_KINDS_HIERARCHY_PATH = "deeppavlov_kg/database/ontology_kinds_hierarchy.pickle"
-..     ONTOLOGY_DATA_MODEL_PATH = "deeppavlov_kg/database/ontology_data_model.json"
-..     DB_IDS_FILE_PATH = "deeppavlov_kg/database/db_ids.txt"
+.. code:: bash
 
-..     neo_kg = Neo4jKnowledgeGraph(
-..             neo4j_bolt_url=NEO4J_BOLT_URL,
-..             ontology_kinds_hierarchy_path=ONTOLOGY_KINDS_HIERARCHY_PATH,
-..             ontology_data_model_path=ONTOLOGY_DATA_MODEL_PATH,
-..             db_ids_file_path=DB_IDS_FILE_PATH,
-..         )
+    git clone https://github.com/deeppavlov/custom_kg_svc.git
+    cd custom_kg_svc
 
-**How to use each of these APIs**
+Install the dependencies using *pip*:
+
+.. code:: bash
+
+    pip install -e .
+
+**Way 1: For using Neo4j as a database:**
+
+Run the docker container inside custom_kg_svc directory:
+
+.. code:: bash
+
+    docker-compose up
+
+Now as the neo4j database is up and running on `<http://localhost:7474/>`_
+you can connect to it using the API:
+
+.. code:: python 
+
+    NEO4J_BOLT_URL = "bolt://neo4j:neo4j@localhost:7687"
+    ONTOLOGY_KINDS_HIERARCHY_PATH = "deeppavlov_kg/database/ontology_kinds_hierarchy.pickle"
+    ONTOLOGY_DATA_MODEL_PATH = "deeppavlov_kg/database/ontology_data_model.json"
+    DB_IDS_FILE_PATH = "deeppavlov_kg/database/db_ids.txt"
+
+    terminus_kg = TerminusdbKnowledgeGraph(team=TEAM, db_name=DB)
+
+    neo_kg = Neo4jKnowledgeGraph(
+            neo4j_bolt_url=NEO4J_BOLT_URL,
+            ontology_kinds_hierarchy_path=ONTOLOGY_KINDS_HIERARCHY_PATH,
+            ontology_data_model_path=ONTOLOGY_DATA_MODEL_PATH,
+            db_ids_file_path=DB_IDS_FILE_PATH,
+        )
+
+**Way 2: For using local TerminusDB database:**
+
+`Clone the TerminusDB bootstrap repository <https://terminusdb.com/docs/get-started/install/install-as-docker-container#clone-the-terminusdb-bootstrap>`_
+and run the docker *terminusdb-container* inside. Then, enter the default username and password
+*(admin, root)*, respectively. Now, your local database is ready, to connect to it you do:
+
+.. code:: python
+
+    DB = "example_db"
+    TEAM ="admin"
+    terminus_kg = TerminusdbKnowledgeGraph(team=TEAM, db_name=DB, local=True)
+
+**Way 3: For using cloud TerminusDB database:**
+
+`Create an account on TerminusX cloud <https://dashboard.terminusdb.com/>`_
+Select a team, and generate a personal access token in your profile page and save it somewhere on your disk.
+Then, export the token in *bash* as environment variable:
+
+.. code:: bash
+
+    export TERMINUSDB_ACCESS_TOKEN="YOUR_TOKEN"
+
+Now, connect to the database on the cloud like so:
+
+.. code:: python
+
+    terminus_kg = TerminusdbKnowledgeGraph(team=TEAM_FROM_CLOUD, db_name=DB)
+
+How to use each of these APIs
+-----------------------------
 
 Create and add entity kinds to the ontology graph:
 
